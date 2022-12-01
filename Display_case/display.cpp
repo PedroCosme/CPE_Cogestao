@@ -17,7 +17,7 @@ int minTemp = 16;
 int defaultSpeed = 1;
 int maxSpeed = 5;
 int minSpeed = 1;
-String defaultMode = "Economico";
+String defaultMode = "Economic";
 
 void initialScreen(int *screen)
 {
@@ -33,9 +33,9 @@ void initialScreen(int *screen)
             tft.setTextSize(2);
             tft.println("");
             tft.write(16);
-            tft.println("Temperatura: " + String(defaultTemp));
-            tft.println(" Velocidade: " + String(defaultSpeed));
-            tft.println(" Modo: " + defaultMode);
+            tft.println("Temperature: " + String(defaultTemp));
+            tft.println(" Speed: " + String(defaultSpeed));
+            tft.println(" Mode: " + defaultMode);
         }
         if (cursorPos == 3)
         {
@@ -44,10 +44,10 @@ void initialScreen(int *screen)
             tft.println("Initial Screen:");
             tft.setTextSize(2);
             tft.println("");
-            tft.println(" Temperatura");
+            tft.println(" Temperature");
             tft.write(16);
-            tft.println("Velocidade");
-            tft.println(" Modo");
+            tft.println("Speed");
+            tft.println(" Mode");
         }
         if (cursorPos == 4)
         {
@@ -56,10 +56,10 @@ void initialScreen(int *screen)
             tft.println("Initial Screen:");
             tft.setTextSize(2);
             tft.println("");
-            tft.println(" Temperatura");
-            tft.println(" Velocidade");
+            tft.println(" Temperature");
+            tft.println(" Speed");
             tft.write(16);
-            tft.println("Modo");
+            tft.println("Mode");
         }
 
         if (digitalRead(downButton) == 0 && cursorPos != 4)
@@ -91,44 +91,30 @@ void tempScreen(int *screen)
     {
         tft.setCursor(0, 0);
         tft.setTextSize(3);
-        tft.println(" Temperatura");
+        tft.println(" Temperature");
         tft.println("");
         tft.println("");
         tft.setTextSize(4);
         tft.write(24);
         tft.write(25);
         tft.setTextSize(6);
-        tft.println(" " + String(defaultTemp) + " C" + '\370');
+        tft.println(" " + String(defaultTemp) + '\370' + " C");
         tft.println("");
         tft.setTextSize(2);
         tft.write(16);
         tft.println("Go back");
 
-        if (digitalRead(downButton) == 0)
+        if (digitalRead(downButton) == 0 && defaultTemp != minTemp)
         {
-            if (defaultTemp > minTemp)
-            {
-                defaultTemp--;
-                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-                delay(150);
-            }
-            else
-            {
-                defaultTemp = defaultTemp;
-            }
+            defaultTemp--;
+            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+            delay(150);
         }
-        if (digitalRead(upButton) == 0)
+        if (digitalRead(upButton) == 0 && defaultTemp != maxTemp)
         {
-            if (defaultTemp < maxTemp)
-            {
-                defaultTemp++;
-                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-                delay(150);
-            }
-            else
-            {
-                defaultTemp = defaultTemp;
-            }
+            defaultTemp++;
+            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+            delay(150);
         }
 
         if (digitalRead(selecButton) == 0)
@@ -148,7 +134,7 @@ void speedScreen(int *screen)
     {
         tft.setCursor(0, 0);
         tft.setTextSize(3);
-        tft.println(" Velocidade");
+        tft.println(" Speed");
         tft.println("");
         tft.println("");
         tft.setTextSize(4);
@@ -161,31 +147,17 @@ void speedScreen(int *screen)
         tft.write(16);
         tft.println("Go back");
 
-        if (digitalRead(downButton) == 0)
+        if (digitalRead(downButton) == 0 && defaultSpeed != minSpeed)
         {
-            if (defaultSpeed > minSpeed)
-            {
-                defaultSpeed--;
-                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-                delay(150);
-            }
-            else
-            {
-                defaultSpeed = defaultSpeed;
-            }
+            defaultSpeed--;
+            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+            delay(150);
         }
-        if (digitalRead(upButton) == 0)
+        if (digitalRead(upButton) == 0 && defaultSpeed != maxSpeed)
         {
-            if (defaultSpeed < maxSpeed)
-            {
-                defaultSpeed++;
-                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-                delay(150);
-            }
-            else
-            {
-                defaultSpeed = defaultSpeed;
-            }
+            defaultSpeed++;
+            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+            delay(150);
         }
 
         if (digitalRead(selecButton) == 0)
@@ -208,12 +180,12 @@ void modeScreen(int *screen)
         {
             tft.setCursor(0, 0);
             tft.setTextSize(3);
-            tft.println("Modo:");
+            tft.println("Mode:");
             tft.setTextSize(2);
             tft.println("");
             tft.write(16);
-            tft.println("Economico");
-            tft.println(" Rapido");
+            tft.println("Economic");
+            tft.println(" Fast");
             tft.println(" Turbo");
         }
         if (cursorPos == 3)
@@ -223,9 +195,9 @@ void modeScreen(int *screen)
             tft.println("Modo:");
             tft.setTextSize(2);
             tft.println("");
-            tft.println(" Economico");
+            tft.println(" Economic");
             tft.write(16);
-            tft.println("Rapido");
+            tft.println("Fast");
             tft.println(" Turbo");
         }
         if (cursorPos == 4)
@@ -235,8 +207,8 @@ void modeScreen(int *screen)
             tft.println("Modo:");
             tft.setTextSize(2);
             tft.println("");
-            tft.println(" Economico");
-            tft.println(" Rapido");
+            tft.println(" Economic");
+            tft.println(" Fast");
             tft.write(16);
             tft.println("Turbo");
         }
@@ -258,11 +230,11 @@ void modeScreen(int *screen)
             Serial.println(cursorPos);
             if (cursorPos == 2)
             {
-                defaultMode = "Economico";
+                defaultMode = "Economic";
             }
             else if (cursorPos == 3)
             {
-                defaultMode = "Rapido";
+                defaultMode = "Fast";
             }
             else if (cursorPos == 4)
             {
