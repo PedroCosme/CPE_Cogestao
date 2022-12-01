@@ -106,22 +106,29 @@ void tempScreen(int *screen)
 
         if (digitalRead(downButton) == 0)
         {
-            defaultTemp--;
-            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-            delay(150);
-            // if(defaultTemp == 16)
-            // {
-
-            // }
+            if (defaultTemp > minTemp)
+            {
+                defaultTemp--;
+                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+                delay(150);
+            }
+            else
+            {
+                defaultTemp = defaultTemp;
+            }
         }
         if (digitalRead(upButton) == 0)
         {
-            defaultTemp++;
-            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-            delay(150);
-            //   if(defaultTemp == 24){
-
-            //   }
+            if (defaultTemp < maxTemp)
+            {
+                defaultTemp++;
+                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+                delay(150);
+            }
+            else
+            {
+                defaultTemp = defaultTemp;
+            }
         }
 
         if (digitalRead(selecButton) == 0)
@@ -156,22 +163,29 @@ void speedScreen(int *screen)
 
         if (digitalRead(downButton) == 0)
         {
-            defaultSpeed--;
-            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-            delay(150);
-            // if(defaultTemp == 16)
-            // {
-
-            // }
+            if (defaultSpeed > minSpeed)
+            {
+                defaultSpeed--;
+                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+                delay(150);
+            }
+            else
+            {
+                defaultSpeed = defaultSpeed;
+            }
         }
         if (digitalRead(upButton) == 0)
         {
-            defaultSpeed++;
-            tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
-            delay(150);
-            //   if(defaultTemp == 24){
-
-            //   }
+            if (defaultSpeed < maxSpeed)
+            {
+                defaultSpeed++;
+                tft.fillRect(78, 40, 80, 80, ILI9341_BLACK);
+                delay(150);
+            }
+            else
+            {
+                defaultSpeed = defaultSpeed;
+            }
         }
 
         if (digitalRead(selecButton) == 0)
@@ -281,6 +295,7 @@ void setup()
 
 void loop()
 {
+    // put your main code here, to run repeatedly:
     switch (screen)
     {
     case 1:
