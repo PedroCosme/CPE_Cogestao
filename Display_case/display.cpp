@@ -98,8 +98,11 @@ void tempScreen(int *screen)
         tft.write(24);
         tft.write(25);
         tft.setTextSize(6);
-        tft.println(" " + String(defaultTemp) + '\370' + " C");
-        tft.println("");
+        tft.println(" " + String(defaultTemp) + " C");
+        tft.setTextSize(3);
+        tft.setCursor(174, 65);
+        tft.println("o");
+        tft.setCursor(100, 200);
         tft.setTextSize(2);
         tft.write(16);
         tft.println("Go back");
